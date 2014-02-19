@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" ng-app="phonecatApp">
+<head>
+  <meta charset="utf-8">
+  <title>NHDS Diagnosis & Procedures</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="lib/angular/angular.js"></script>
+  <script src="js/controllers.js"></script>
+</head>
+<body ng-controller="PhoneListCtrl">
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2">
+        <!--Sidebar content-->
+
+        Search: <input ng-model="query">
+		<div class="small">*Search would display only first 500 results</div>
+        Sort by:
+        <select ng-model="orderProp">
+          <option value="name">Alphabetical</option>
+          <option value="age">Newest</option>
+        </select>
+
+      </div>
+      <div class="span10">
+	  	  <PRE>About: <br>A MapReduce batch process been used to convert NHDS data (0.15 Million) with Diagnosis & Procedure codes to respective ICD references.<br>With this we can find various diagnosis & procedures taken for any particular disease.<br>Best viewed in Firefox. In case of any issues, please <a href="mailto:amalan.jagan@gmail.com?subject=Incorrect NHDS mapping">Send Email</a>.</PRE><br>
+        <!--Body content-->
+
+        <ul class="phones">
+          <li ng-repeat="phone in phones | filter:query | orderBy:orderProp | limitTo:500">
+            <b>Diagnosis:</b> {{phone.name}}<br>
+            <b>Procedure:</b> <p>{{phone.snippet}}</p>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
